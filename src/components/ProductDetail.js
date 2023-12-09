@@ -6,10 +6,6 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
-  useEffect(() => {
-    fetchProduct();
-  }, [id]);
-
   const fetchProduct = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/products/${id}`);
@@ -18,6 +14,10 @@ const ProductDetail = () => {
       console.error('Error fetching product:', error);
     }
   };
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct, id]); // Incluímos fetchProduct e id no array de dependências
 
   return (
     <div>
